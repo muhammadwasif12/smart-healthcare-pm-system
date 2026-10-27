@@ -1,0 +1,20 @@
+{
+  "name": "healthcare-pm-server",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "sql.js": "^1.15.1"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0"
+  }
+}
