@@ -1,6 +1,6 @@
 # Smart Healthcare PM System — ER Diagram
 
-> Concise overview of the main database entities and their relationships.  
+> Concise overview of the main database entities and their relationships.
 > The complete implementation is defined in [`schema.sql`](./schema.sql).
 
 ```mermaid
