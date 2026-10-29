@@ -16,13 +16,16 @@ erDiagram
     ACTIVITIES ||--o{ ACTIVITY_DEPENDENCIES : depends_on
     ACTIVITIES ||--o{ EXPENSES : incurs
     ACTIVITIES ||--o{ PROGRESS_LOG : tracks
-    ACTIVITIES ||--o{ MILESTONES : reaches
+    ACTIVITIES ||--o{ MILESTONE_ACTIVITIES : links
+    MILESTONES ||--o{ MILESTONE_ACTIVITIES : includes
     ACTIVITIES ||--o{ DEFECTS : contains
+    TEAM_MEMBERS ||--o{ RESPONSIBILITIES : owns
+    TEAM_MEMBERS ||--o{ DEFECTS : assigned
     QUALITY_CHECKLISTS ||--o{ CHECKLIST_ITEMS : contains
     CHECKLIST_ITEMS ||--o{ INSPECTION_RESULTS : records
     WBS_ITEMS ||--o{ QUALITY_CHECKLISTS : validates
-    RISKS ||--o{ PDPC_NODES : informs
-    PDPC_NODES ||--o{ PDPC_NODES : parent
+    RISKS ||--o{ PDPC_ITEMS : informs
+    PDPC_ITEMS ||--o{ PDPC_ITEMS : parent
 
     PROJECT_CHARTER {
         int id PK
@@ -91,6 +94,17 @@ erDiagram
         string name
         date planned_date
     }
+    MILESTONE_ACTIVITIES {
+        int id PK
+        int milestone_id FK
+        int activity_id FK
+    }
+    RESPONSIBILITIES {
+        int id PK
+        int team_member_id FK
+        string deliverable
+        string responsibility_type
+    }
     EXPENSES {
         int id PK
         int activity_id FK
@@ -112,22 +126,24 @@ erDiagram
         int id PK
         string code UK
         int activity_id FK
+        int wbs_item_id FK
+        int assignee_id FK
         string severity
         string status
     }
     QUALITY_CHECKLISTS {
         int id PK
         string name
-        int wbs_id FK
+        int wbs_item_id FK
     }
     CHECKLIST_ITEMS {
         int id PK
         int checklist_id FK
-        string check_item
+        string description
     }
     INSPECTION_RESULTS {
         int id PK
-        int item_id FK
+        int checklist_item_id FK
         string result
     }
     RISKS {
@@ -137,7 +153,7 @@ erDiagram
         int impact
         string status
     }
-    PDPC_NODES {
+    PDPC_ITEMS {
         int id PK
         int parent_id FK
         int risk_id FK
